@@ -1,4 +1,11 @@
 return {
+  { import = "lazyvim.plugins.extras.coding.copilot" },
+  { import = "lazyvim.plugins.extras.dap.core" },
+  { import = "lazyvim.plugins.extras.formatting.prettier" },
+  { import = "lazyvim.plugins.extras.lang.json" },
+  { import = "lazyvim.plugins.extras.lang.typescript" },
+  { import = "lazyvim.plugins.extras.linting.eslint" },
+  { import = "lazyvim.plugins.extras.util.project" },
   {
     "max397574/better-escape.nvim",
     keys = { "jk", "jj" },
@@ -75,33 +82,6 @@ return {
         require("telescope").load_extension("fzf")
       end,
     },
-  },
-
-  {
-    "zbirenbaum/copilot-cmp",
-    dependencies = {
-      {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        build = ":Copilot auth",
-        opts = {
-          suggestion = { enabled = false },
-          panel = { enabled = false },
-        },
-      },
-    },
-    opts = {},
-    config = function(_, opts)
-      local copilot_cmp = require("copilot_cmp")
-      copilot_cmp.setup(opts)
-      -- attach cmp source whenever copilot attaches
-      -- fixes lazy-loading issues with the copilot cmp source
-      require("lazyvim.util").on_attach(function(client)
-        if client.name == "copilot" then
-          copilot_cmp._on_insert_enter()
-        end
-      end)
-    end,
   },
 
   -- add tsserver and setup with typescript.nvim instead of lspconfig
