@@ -24,6 +24,15 @@ return {
     },
   },
 
+  -- autopairs
+  {
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup({
+        disable_filetype = { "TelescopePrompt", "vim" },
+      })
+    end,
+  },
   -- multi cursor
   {
     "mg979/vim-visual-multi",
@@ -52,26 +61,14 @@ return {
   -- change some telescope options and a keymap to browse plugin files
   {
     "nvim-telescope/telescope.nvim",
-    keys = {
-      {
-        "<leader>fp",
-        function()
-          require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root })
-        end,
-        desc = "Find Plugin File",
-      },
-    },
-    -- change some options
     opts = {
       defaults = {
         layout_strategy = "horizontal",
-        layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
         winblend = 0,
       },
     },
   },
-
   -- add telescope-fzf-native
   {
     "telescope.nvim",
@@ -110,6 +107,9 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "windwp/nvim-ts-autotag",
+    },
     opts = {
       ensure_installed = {
         "bash",
@@ -129,6 +129,9 @@ return {
         "vim",
         "yaml",
       },
+      autotag = {
+        enable = true,
+      },
     },
   },
 
@@ -147,6 +150,18 @@ return {
     opts = function(_, opts)
       table.insert(opts.sections.lualine_x, "😄")
     end,
+  },
+
+  {
+    "andrewferrier/debugprint.nvim",
+    keys = { "g?p" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("debugprint").setup()
+    end,
+    version = "*",
   },
 
   -- add any tools you want to have installed below
