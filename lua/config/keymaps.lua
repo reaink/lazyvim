@@ -16,6 +16,7 @@ local function map(mode, lhs, rhs, opts)
 end
 
 map("n", "<leader>gd", "<cmd> cd %:p:h <CR> <cmd> pwd <CR>", { desc = "jump to current dir to pwd" })
+map("n", "<leader>n", "<cmd> Neotree focus <CR>", { desc = "Explorer focus" })
 map("n", ";", ":", { desc = "command mode" })
 map("n", "<C-c>", "<cmd> %y+ <CR>", { desc = "yank all lines" })
 

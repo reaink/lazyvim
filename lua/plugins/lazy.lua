@@ -154,7 +154,10 @@ return {
 
   {
     "andrewferrier/debugprint.nvim",
-    keys = { "g?p" },
+    keys = {
+      {  "g?p", desc = "Print debug info" },
+      {  "g?v", desc = "Print selection debug info", mode = "v" }
+    },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
