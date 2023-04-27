@@ -9,7 +9,7 @@ return {
   {
     "max397574/better-escape.nvim",
     keys = { "jk", "jj" },
-    config = function()
+    init = function()
       require("better_escape").setup()
     end,
   },
@@ -148,15 +148,41 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function(_, opts)
-      table.insert(opts.sections.lualine_x, "😄")
+      local mode_map = {
+        ["NORMAL"] = "N",
+        ["O-PENDING"] = "N?",
+        ["INSERT"] = "I",
+        ["VISUAL"] = "V",
+        ["V-BLOCK"] = "VB",
+        ["V-LINE"] = "VL",
+        ["V-REPLACE"] = "VR",
+        ["REPLACE"] = "R",
+        ["COMMAND"] = ">",
+        ["SHELL"] = "SH",
+        ["TERMINAL"] = "T",
+        ["EX"] = "X",
+        ["S-BLOCK"] = "SB",
+        ["S-LINE"] = "SL",
+        ["SELECT"] = "S",
+        ["CONFIRM"] = "Y?",
+        ["MORE"] = "M",
+      }
+      opts.sections.lualine_a = {
+        {
+          "mode",
+          fmt = function(s)
+            return vim.b["visual_multi"] and mode_map[s] .. "-M" or mode_map[s] or s
+          end,
+        },
+      }
     end,
   },
 
   {
     "andrewferrier/debugprint.nvim",
     keys = {
-      {  "g?p", desc = "Print debug info" },
-      {  "g?v", desc = "Print selection debug info", mode = "v" }
+      { "g?p", desc = "Print debug info" },
+      { "g?v", desc = "Print selection debug info", mode = "v" },
     },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
