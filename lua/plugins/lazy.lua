@@ -1,3 +1,4 @@
+---@type LazySpec[]
 return {
   { import = "lazyvim.plugins.extras.coding.copilot" },
   { import = "lazyvim.plugins.extras.dap.core" },
@@ -257,5 +258,24 @@ return {
         end, { "i", "s" }),
       })
     end,
+  },
+
+  {
+    "smjonas/live-command.nvim",
+    cmd = { "Norm" },
+    config = function()
+      require("live-command").setup({
+        commands = {
+          Norm = { cmd = "norm" },
+        },
+      })
+    end,
+  },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      current_line_blame = true,
+    },
   },
 }
