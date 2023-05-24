@@ -1,6 +1,6 @@
 ---@type LazySpec[]
 return {
-  { import = "lazyvim.plugins.extras.coding.copilot" },
+  -- { import = "lazyvim.plugins.extras.coding.copilot" },
   { import = "lazyvim.plugins.extras.dap.core" },
   { import = "lazyvim.plugins.extras.formatting.prettier" },
   { import = "lazyvim.plugins.extras.lang.json" },
@@ -278,4 +278,7 @@ return {
       current_line_blame = true,
     },
   },
+  {
+    "jxnblk/vim-mdx-js"
+  }
 }
