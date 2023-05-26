@@ -55,7 +55,10 @@ return {
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local cmp = require("cmp")
-      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
+      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+        { name = "emoji" },
+        { name = "nvim_lsp", trigger_characters = { "-" } },
+      }))
     end,
   },
 
@@ -279,6 +282,19 @@ return {
     },
   },
   {
-    "jxnblk/vim-mdx-js"
-  }
+    "jxnblk/vim-mdx-js",
+  },
+  {
+    "dpayne/CodeGPT.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("codegpt.config")
+      vim.g["codegpt_openai_api_key"] = os.getenv("OPENAI_SB_API_KEY")
+      vim.g["codegpt_openai_api_provider"] = "OpenAI"
+      vim.g["codegpt_chat_completions_url"] = "https://api.openai-sb.com/v1/chat/completions"
+    end,
+  },
 }

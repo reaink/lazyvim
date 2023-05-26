@@ -46,4 +46,33 @@ return {
   { import = "plugins.extras.lang.java" },
   { import = "plugins.extras.lang.rust" },
   { import = "plugins.extras.lang.nodejs" },
+
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      local eslint_config = {
+        condition = function(utils)
+          return utils.root_has_file({
+            ".eslintrc",
+            ".eslintrc.js",
+            ".eslintrc.cjs",
+            ".eslintrc.yaml",
+            ".eslintrc.yml",
+            ".eslintrc.json",
+          })
+        end,
+      }
+      table.insert(opts.sources, nls.builtins.diagnostics.eslint_d.with(eslint_config))
+      table.insert(opts.sources, nls.builtins.formatting.eslint_d.with(eslint_config))
+    end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        unocss = {},
+      },
+    },
+  },
 }
