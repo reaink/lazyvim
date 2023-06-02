@@ -63,7 +63,6 @@ return {
           })
         end,
       }
-      table.insert(opts.sources, nls.builtins.diagnostics.eslint_d.with(eslint_config))
       table.insert(opts.sources, nls.builtins.formatting.eslint_d.with(eslint_config))
     end,
   },
